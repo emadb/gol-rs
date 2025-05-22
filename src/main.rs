@@ -15,7 +15,6 @@ const FPS: u32 = 5;
 fn initialize_game(rng: &mut impl Rng) -> Game {
     let mut game = Game::new(SIZE);
 
-    // Random position
     for _ in 0..INITIAL_LIVE_CELLS {
         let p = Location::new(rng.random_range(0..SIZE.0), rng.random_range(0..SIZE.0));
         game.set_live(p);
