@@ -1,4 +1,4 @@
-use gol::{Cell, Game, Position, Size};
+use gol::{Cell, Game, Location, Size};
 use rand::Rng;
 use ruscii::app::Config;
 use ruscii::app::{App, State};
@@ -17,7 +17,7 @@ fn initialize_game(rng: &mut impl Rng) -> Game {
 
     // Random position
     for _ in 0..INITIAL_LIVE_CELLS {
-        let p = Position::new(rng.random_range(0..SIZE.0), rng.random_range(0..SIZE.0));
+        let p = Location::new(rng.random_range(0..SIZE.0), rng.random_range(0..SIZE.0));
         game.set_live(p);
     }
 
@@ -42,7 +42,7 @@ fn handle_keyboard_events(app_state: &mut State) {
 fn draw_game(pencil: &mut Pencil, game: &Game) {
     for x in 0..SIZE.0 {
         for y in 0..SIZE.0 {
-            let cell = game.get(Position::new(x, y));
+            let cell = game.get(Location::new(x, y));
             if *cell == Cell::Live {
                 pencil.draw_filled_rect('\u{25A9}', Vec2::xy(x, y), Vec2::xy(1, 1));
             }
